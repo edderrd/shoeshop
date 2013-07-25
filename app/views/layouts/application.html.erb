@@ -36,24 +36,13 @@
   </head>
   <body>
 
-    <div class="navbar navbar-fixed-top navbar-inverse">
-      <div class="navbar-inner">
-        <div class="container-fluid">
-          <a class="btn btn-navbar" data-target=".nav-collapse" data-toggle="collapse">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </a>
-          <a class="brand" href="#">Shoeshop</a>
-          <div class="container-fluid nav-collapse">
-            <ul class="nav">
-              <li><%= link_to "Articles", articles_path  %></li>
-              <li><%= link_to "Stores", stores_path  %></li>
-            </ul>
-          </div><!--/.nav-collapse -->
-        </div>
-      </div>
-    </div>
+    <%= nav_bar :fixed => :top, :brand => "ShoeShop", :responsive => true, inverse: true do %>
+      <% menu_group do %>
+        <%= menu_item "Home", root_path %>
+        <%= menu_item "Articles", articles_path %>
+        <%= menu_item "Stores", stores_path %>
+      <% end %>
+    <% end %>
 
     <div class="container-fluid">
       <div class="row-fluid">
