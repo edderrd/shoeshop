@@ -25,6 +25,7 @@ class ArticlesController < ApplicationController
   # POST /articles.json
   def create
     @article = Article.new(article_params)
+    @stores = Store.all
 
     respond_to do |format|
       if @article.save

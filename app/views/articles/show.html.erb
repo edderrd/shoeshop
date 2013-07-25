@@ -9,13 +9,13 @@
   <dt><strong><%= model_class.human_attribute_name(:description) %>:</strong></dt>
   <dd><%= @article.description %></dd>
   <dt><strong><%= model_class.human_attribute_name(:price) %>:</strong></dt>
-  <dd><%= @article.price %></dd>
+  <dd><%= number_to_currency(@article.price) %></dd>
   <dt><strong><%= model_class.human_attribute_name(:total_in_shelf) %>:</strong></dt>
   <dd><%= @article.total_in_shelf %></dd>
   <dt><strong><%= model_class.human_attribute_name(:total_in_vault) %>:</strong></dt>
   <dd><%= @article.total_in_vault %></dd>
   <dt><strong><%= model_class.human_attribute_name(:store_id) %>:</strong></dt>
-  <dd><%= @article.store_id %></dd>
+  <dd><%= @article.store.name %></dd>
 </dl>
 
 <div class="form-actions">
