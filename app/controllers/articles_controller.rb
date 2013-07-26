@@ -1,11 +1,12 @@
 class ArticlesController < ApplicationController
   before_action :set_article, only: [:show, :edit, :update, :destroy]
-  respond_to :html, :json, :xml
+  respond_to :html, :json
 
   # GET /articles
   # GET /articles.json
   def index
     @articles = Article.all
+    @rest_options = get_rest_options(success: false)
 
     respond_with(@articles)
   end
