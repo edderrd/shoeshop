@@ -5,10 +5,10 @@ Shoeshop::Application.routes.draw do
   resources :stores, format: false
 
   scope :services do
-    resources :articles, only: [:index, :show], :constraints => {:format => /(js|json|xml)/}, :defaults => { :format => 'json' } do
-      get :store, on: :member
-    end
+    resources :articles, only: [:index, :show], :constraints => {:format => /(js|json|xml)/}, :defaults => { :format => 'json' }
     resources :stores, only: [:index, :show], :constraints => {:format => /(js|json|xml)/}, :defaults => { :format => 'json' }
+
+    get "/articles/stores/:id", to: "articles#store", :constraints => {:format => /(js|json|xml)/}, :defaults => { :format => 'json' }
   end
 
   # The priority is based upon order of creation: first created -> highest priority.

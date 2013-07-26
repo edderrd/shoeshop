@@ -49,6 +49,16 @@ class ArticlesController < ApplicationController
     respond_with(@article)
   end
 
+  def store
+    @articles = Article.where(store_id: params[:id])
+    if @articles.size == 0
+      @rest_options[:error_code] = 404
+      @rest_options[:error_msg] = "No articles found for the store"
+    end
+
+    respond_with(@articles, status: get_status)
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_article
