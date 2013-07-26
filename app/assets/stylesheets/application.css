@@ -19,3 +19,29 @@
     border: 1px solid red;
 }
 
+.container-main {
+    min-height:100%;
+}
+
+.main-footer {
+    /*background: #333;*/
+    color: #777;
+    clear: both;
+    padding: 10px;
+    overflow: hidden;
+    margin-top:40px;
+    background-image: linear-gradient(bottom, rgb(255,255,255) 15%, rgb(199,199,199) 100%);
+    background-image: -o-linear-gradient(bottom, rgb(255,255,255) 15%, rgb(199,199,199) 100%);
+    background-image: -moz-linear-gradient(bottom, rgb(255,255,255) 15%, rgb(199,199,199) 100%);
+    background-image: -webkit-linear-gradient(bottom, rgb(255,255,255) 15%, rgb(199,199,199) 100%);
+    background-image: -ms-linear-gradient(bottom, rgb(255,255,255) 15%, rgb(199,199,199) 100%);
+
+    background-image: -webkit-gradient(
+        linear,
+        left bottom,
+        left top,
+        color-stop(0.15, rgb(255,255,255)),
+        color-stop(1, rgb(199,199,199))
+    );
+}
+
