@@ -3,46 +3,47 @@ class StoresController < ApplicationController
   before_action :set_store, only: [:show, :edit, :update, :destroy]
   respond_to :html, :json
 
-  # GET /stores
-  # GET /stores.json
+  # GET /resources/stores
+  # GET /resources/stores.json
   def index
     @stores = Store.all
-    respond_with(@stores)
+    respond_with(@stores, status: get_status)
   end
 
-  # GET /stores/1
-  # GET /stores/1.json
+  # GET /resources/stores/1
+  # GET /resources/stores/1.json
   def show
+    respond_with(@store, status: get_status)
   end
 
-  # GET /stores/new
+  # GET /resources/stores/new
   def new
     @store = Store.new
     respond_with(@store)
   end
 
-  # GET /stores/1/edit
+  # GET /resources/stores/1/edit
   def edit
     respond_with(@store)
   end
 
-  # POST /stores
-  # POST /stores.json
+  # POST /resources/stores
+  # POST /resources/stores.json
   def create
     @store = Store.new(store_params)
     flash[:notice] = 'Store was successfully created.' if @store.save
     respond_with(@store)
   end
 
-  # PATCH/PUT /stores/1
-  # PATCH/PUT /stores/1.json
+  # PATCH/PUT /resources/stores/1
+  # PATCH/PUT /resources/stores/1.json
   def update
     flash[:notice] = 'Store was successfully updated.'
     respond_with(@store)
   end
 
-  # DELETE /stores/1
-  # DELETE /stores/1.json
+  # DELETE /resources/stores/1
+  # DELETE /resources/stores/1.json
   def destroy
     @store.destroy
     respond_with(@store)

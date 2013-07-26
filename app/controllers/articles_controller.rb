@@ -7,14 +7,13 @@ class ArticlesController < ApplicationController
   # GET /articles.json
   def index
     @articles = Article.all
-    respond_with(@articles)
+    respond_with @articles, status: get_status
   end
 
   # GET /articles/1
   # GET /articles/1.json
   def show
-    
-    respond_with(@article)
+    respond_with @articles, status: get_status
   end
 
   # GET /articles/new
@@ -31,16 +30,9 @@ class ArticlesController < ApplicationController
   def create
     @article = Article.new(article_params)
     @stores = Store.all
-    if @article.save
-      flash[:notice] = 'Article was successfully created.'
-      respond_with(@article)
-    else
-      @article = Article.new
-      @rest_options[:success] = false
-      @rest_options[:error_code] = 400
-      @rest_options[:error_message] = @article.errors
-      respond_with(@article, status: 400)
-    end 
+    flash[:notice] = 'Article was successfully created.' if @article.save
+
+    respond_with(@article)
   end
 
   # PATCH/PUT /articles/1
@@ -65,7 +57,7 @@ class ArticlesController < ApplicationController
         @article = Article.new
         @rest_options[:success] = false
         @rest_options[:error_code] = 404
-        @rest_options[:error_message] = "Article not found"
+        @rest_options[:error_msg] = "Article not found"
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

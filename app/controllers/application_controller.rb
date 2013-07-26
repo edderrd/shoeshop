@@ -11,4 +11,8 @@ class ApplicationController < ActionController::Base
   def set_rest_options
     @rest_options = get_rest_options
   end
+
+  def get_status
+    @rest_options[:error_code].nil? ? 200 : @rest_options[:error_code]
+  end
 end

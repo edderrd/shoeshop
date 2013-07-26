@@ -5,7 +5,9 @@ Shoeshop::Application.routes.draw do
   resources :stores, format: false
 
   scope :services do
-    resources :articles, only: [:index, :show], :constraints => {:format => /(js|json|xml)/}, :defaults => { :format => 'json' }
+    resources :articles, only: [:index, :show], :constraints => {:format => /(js|json|xml)/}, :defaults => { :format => 'json' } do
+      get :store, on: :member
+    end
     resources :stores, only: [:index, :show], :constraints => {:format => /(js|json|xml)/}, :defaults => { :format => 'json' }
   end
 
