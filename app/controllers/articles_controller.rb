@@ -1,4 +1,5 @@
 class ArticlesController < ApplicationController
+  before_action :set_rest_options
   before_action :set_article, only: [:show, :edit, :update, :destroy]
   respond_to :html, :json
 
@@ -6,14 +7,14 @@ class ArticlesController < ApplicationController
   # GET /articles.json
   def index
     @articles = Article.all
-    @rest_options = get_rest_options(success: false)
-
     respond_with(@articles)
   end
 
   # GET /articles/1
   # GET /articles/1.json
   def show
+    
+    respond_with(@article)
   end
 
   # GET /articles/new
@@ -30,8 +31,16 @@ class ArticlesController < ApplicationController
   def create
     @article = Article.new(article_params)
     @stores = Store.all
-    flash[:notice] = 'Article was successfully created.' if @article.save
-    respond_with(@article)
+    if @article.save
+      flash[:notice] = 'Article was successfully created.'
+      respond_with(@article)
+    else
+      @article = Article.new
+      @rest_options[:success] = false
+      @rest_options[:error_code] = 400
+      @rest_options[:error_message] = @article.errors
+      respond_with(@article, status: 400)
+    end 
   end
 
   # PATCH/PUT /articles/1
@@ -52,6 +61,11 @@ class ArticlesController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_article
       @article = Article.find(params[:id])
+      rescue ActiveRecord::RecordNotFound => e
+        @article = Article.new
+        @rest_options[:success] = false
+        @rest_options[:error_code] = 404
+        @rest_options[:error_message] = "Article not found"
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
