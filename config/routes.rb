@@ -1,9 +1,13 @@
 Shoeshop::Application.routes.draw do
   root "home#index"
 
-  resources :articles
+  resources :articles, format: false
+  resources :stores, format: false
 
-  resources :stores
+  scope :services do
+    resources :articles, :constraints => {:format => /(js|json|xml)/}, :defaults => { :format => 'json' }
+    resources :stores, :constraints => {:format => /(js|json|xml)/}, :defaults => { :format => 'json' }
+  end
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

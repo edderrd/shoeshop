@@ -5,6 +5,13 @@ class ArticlesController < ApplicationController
   # GET /articles.json
   def index
     @articles = Article.all
+    @json_articles = json_response @articles
+
+    respond_to do |format|
+      format.html
+      format.xml { render xml: @articles, status: :ok }
+      format.json { render json: @json_articles, status: :ok }
+    end
   end
 
   # GET /articles/1

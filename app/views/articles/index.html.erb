@@ -25,7 +25,7 @@
         <td><%= article.price %></td>
         <td><%= article.total_in_shelf %></td>
         <td><%= article.total_in_vault %></td>
-        <td><%= article.store.name %></td>
+        <td><%= article.store_name %></td>
         <td title="<%=l article.created_at %>"><%= time_ago_in_words(article.created_at) %> ago</td>
         <td>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),
