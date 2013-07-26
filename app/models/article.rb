@@ -1,6 +1,13 @@
 class Article < ActiveRecord::Base
   belongs_to :store
 
+  validates :name, presence: true
+  validates :price, presence: true, numericality: true
+  validates :total_in_shelf, numericality: { only_integer: true }
+  validates :total_in_vault, numericality: { only_integer: true }
+
+  scope :recent, -> { order(created_at: :desc) }
+
   def store_name
     store_name = self.store.presence ? self.store.name : nil
   end
