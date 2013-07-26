@@ -3,6 +3,6 @@ class Store < ActiveRecord::Base
 
     def as_json(options = {})
     super(options || 
-        {except:[:created_at, :updated_at] })
+        {except:[:created_at, :updated_at]})
     end
 end

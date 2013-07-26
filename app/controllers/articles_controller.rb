@@ -1,17 +1,13 @@
 class ArticlesController < ApplicationController
   before_action :set_article, only: [:show, :edit, :update, :destroy]
+  respond_to :html, :json, :xml
 
   # GET /articles
   # GET /articles.json
   def index
     @articles = Article.all
-    @json_articles = json_response @articles
 
-    respond_to do |format|
-      format.html
-      format.xml { render xml: @articles, status: :ok }
-      format.json { render json: @json_articles, status: :ok }
-    end
+    respond_with(@articles)
   end
 
   # GET /articles/1
@@ -33,40 +29,22 @@ class ArticlesController < ApplicationController
   def create
     @article = Article.new(article_params)
     @stores = Store.all
-
-    respond_to do |format|
-      if @article.save
-        format.html { redirect_to @article, notice: 'Article was successfully created.' }
-        format.json { render action: 'show', status: :created, location: @article }
-      else
-        format.html { render action: 'new' }
-        format.json { render json: @article.errors, status: :unprocessable_entity }
-      end
-    end
+    flash[:notice] = 'Article was successfully created.' if @article.save
+    respond_with(@article)
   end
 
   # PATCH/PUT /articles/1
   # PATCH/PUT /articles/1.json
   def update
-    respond_to do |format|
-      if @article.update(article_params)
-        format.html { redirect_to @article, notice: 'Article was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { render action: 'edit' }
-        format.json { render json: @article.errors, status: :unprocessable_entity }
-      end
-    end
+    flash[:notice] = 'Article was successfully updated.' if @article.update(article_params)
+    respond_with(@article)
   end
 
   # DELETE /articles/1
   # DELETE /articles/1.json
   def destroy
     @article.destroy
-    respond_to do |format|
-      format.html { redirect_to articles_url }
-      format.json { head :no_content }
-    end
+    respond_with(@article)
   end
 
   private

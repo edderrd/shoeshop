@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
 
-  def json_response(model, options = {})
+  def rest_response(model, options = {})
     total_elements = model.size
     model_name = total_elements > 1 ? model.name.pluralize : model.name
     defaults = {

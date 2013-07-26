@@ -6,7 +6,7 @@ class Article < ActiveRecord::Base
   end
 
   def as_json(options = nil)
-    super(options ||
-            { except: [:store_id, :created_at, :updated_at] })
-    end
+    options = super(options ||
+            { except: [:store_id, :created_at, :updated_at], methods: [:store_name] })
+  end
 end
