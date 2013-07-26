@@ -22,7 +22,7 @@
         <td><%= link_to article.id, article_path(article) %></td>
         <td><%= link_to article.name, article_path(article) %></td>
         <td><%= article.description %></td>
-        <td><%= article.price %></td>
+        <td><%= number_to_currency(article.price) %></td>
         <td><%= article.total_in_shelf %></td>
         <td><%= article.total_in_vault %></td>
         <td><%= article.store_name %></td>
